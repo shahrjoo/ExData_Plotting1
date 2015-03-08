@@ -8,9 +8,14 @@ df$Date <- as.Date(df$Date, format = "%d/%m/%Y")
 #subsetting the data
 df1<-subset(df,(df$Date>="2007-02-01" & df$Date<="2007-02-02"))
 
-#drawing histogram
-hist(df1$Global_active_power,col="red",main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
 
-#create the png file
-dev.copy(png,file="plot1.png")
+#set the output plot file
+png(filename="plot1.png", width=480, height=480)
+
+#setting parameters
+par(mfrow=c(1,1), mar = c(5,4,4,4))
+
+#drawing histogram
+hist(df1$Global_active_power,col="red",main = "Global Active Power", xlab = "Global Active Power (kilowatts)",cex=0.7)
+
 dev.off()

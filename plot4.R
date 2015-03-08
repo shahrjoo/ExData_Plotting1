@@ -12,20 +12,24 @@ df1<-subset(df,(df$Date>="2007-02-01" & df$Date<="2007-02-02"))
 date_time <- paste(as.Date(df1$Date), df1$Time)
 df1$Datetime <- as.POSIXct(date_time)
 
+
+
 #set the output plot file
-png(filename="plot3.png", width=480, height=480)
+png(filename="plot4.png", width=480, height=480)
 
 #setting parameters
-par(mfrow=c(1,1), mar = c(5,4,4,4))
+par(mfrow = c(2,2), mar = c(4,4,3,1), oma = c(0,0,2,0))
 
-#plotting
 with(df1,{
-        plot(Datetime,Sub_metering_1,type="l",ylab = "Energy sub metering", xlab = "",cex=0.7)
+        plot(Global_active_power ~ Datetime, type = "l",ylab = "Global Active Power", xlab = "")
+        plot(Voltage ~ Datetime, type = "l",ylab = "Voltage", xlab = "datetime")
+        plot(Datetime,Sub_metering_1,type="l",ylab = "Energy Sub metering", xlab = "")
         lines(Datetime,Sub_metering_2,type="l",col="red")
         lines(Datetime,Sub_metering_3,type="l",col="blue")
-        legend("topright", lty = 1, lwd = 1, col = c("black", "red", "blue"),legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-       
+        legend("topright", lty = 1, lwd = 1, col = c("black", "red", "blue"),legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),bty="n")
+        plot(Global_reactive_power ~ Datetime, type = "l",ylab = "Global_rective_power", xlab = "datetime")
+        
+        
 })
-
 
 dev.off()

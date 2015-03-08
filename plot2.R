@@ -12,9 +12,16 @@ df1<-subset(df,(df$Date>="2007-02-01" & df$Date<="2007-02-02"))
 date_time <- paste(as.Date(df1$Date), df1$Time)
 df1$Datetime <- as.POSIXct(date_time)
 
-#plotting the data
-plot(df1$Global_active_power ~ df1$Datetime, type = "l",ylab = "Global Active Power (kilowatts)", xlab = "")
 
-#create the png file
-dev.copy(png,file="plot2.png")
+
+#set the output plot file
+png(filename="plot2.png", width=480, height=480)
+
+#setting parameters
+par(mfrow=c(1,1), mar = c(5,4,4,4))
+
+#plotting the data
+plot(df1$Global_active_power ~ df1$Datetime, type = "l",ylab = "Global Active Power (kilowatts)", xlab = "",cex=0.7)
+
+
 dev.off()
